@@ -18,11 +18,54 @@ body{margin:0}
 html{scroll-behavior:smooth}
 a{color:inherit}
 a:hover{opacity:0.8}
+
+/* ===== Animaciones ===== */
+.js .rv{opacity:0;transform:translateY(32px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--rd,0s)}
+.js .rv.in{opacity:1;transform:none}
+.js .rv-r{transform:translateX(40px)}.js .rv-l{transform:translateX(-40px)}
+.js .rv.in.rv-r,.js .rv.in.rv-l{transform:none}
+.hov.in:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(43,58,40,.18);transition-delay:0s;transition-duration:.3s}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-14px) rotate(1.5deg)}}
+@keyframes rise{0%{transform:translateY(0) scale(.6);opacity:0}10%{opacity:.8}100%{transform:translateY(var(--h,-300px)) translateX(var(--sx,0)) scale(1);opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+@keyframes fillup{from{transform:translateY(100%)}to{transform:translateY(0)}}
+@keyframes wave{to{transform:translateX(-50%)}}
+@keyframes shine{0%{transform:translateX(-120%)}60%,100%{transform:translateX(220%)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@keyframes heroIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+.hero-in>*{animation:heroIn .9s cubic-bezier(.2,.7,.2,1) both}
+.hero-in>*:nth-child(1){animation-delay:.1s}.hero-in>*:nth-child(2){animation-delay:.25s}.hero-in>*:nth-child(3){animation-delay:.4s}.hero-in>*:nth-child(4){animation-delay:.55s}.hero-in>*:nth-child(5){animation-delay:.7s}
+.logo-float{animation:floaty 6s ease-in-out infinite}
+#inicio{position:relative;overflow:hidden}
+#inicio>div{position:relative;z-index:1}
+.bub{position:absolute;bottom:-20px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.7),rgba(218,138,103,.25));border:1px solid rgba(245,243,234,.35);animation:rise linear infinite;pointer-events:none;z-index:0}
+.btn-shine{position:relative;overflow:hidden;animation:pulse 2.8s ease-in-out infinite}
+.btn-shine::after{content:"";position:absolute;inset:0;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);animation:shine 3.2s ease-in-out infinite}
+.glass-bub{animation:rise linear infinite;transform-box:fill-box;transform-origin:center}
+.liquid{animation:fillup 2.4s cubic-bezier(.3,.7,.2,1) both;animation-play-state:paused}
+.in .liquid{animation-play-state:running}
+.wave{animation:wave 4s linear infinite}
+.ing-spin{animation:spin 24s linear infinite;transform-box:fill-box;transform-origin:center}
+.ing-sway{animation:sway 3.5s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 0}
+.ing-float{animation:floaty 5s ease-in-out infinite}
+.js .ing-card.in{transition:transform .35s ease,background .35s ease,opacity .8s}
+.ing-card.in:hover{transform:translateY(-8px);background:rgba(245,243,234,.16)!important;transition-delay:0s}
+.ing-card svg{transition:transform .4s ease}
+.ing-card:hover svg{transform:scale(1.08)}
+.dot-pop{transition:transform .3s}
+.dot-pop:hover{transform:scale(1.5)}
+html{scroll-padding-top:70px}
+@media (prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none!important;transition:none!important}
+.js .rv{opacity:1;transform:none}
+}
 a:focus-visible{outline:3px solid #D97736;outline-offset:3px}
 img{max-width:100%}
 </style>
 </head>
 <body>
+<script>document.documentElement.classList.add("js")</script>
 
 
 <div style="width: 100%; background: #F5F3EA; color: #2B3A28; font-family: 'DM Sans', sans-serif; font-size: 17px; line-height: 1.6">
@@ -32,6 +75,7 @@ img{max-width:100%}
 <a href="#inicio" style="font-family: 'Fraunces', serif; font-weight: 600; font-size: 26px; color: #3F5E3B; text-decoration: none">Kuri Sisary</a>
 <div style="display: flex; flex-wrap: wrap; gap: 0 20px; font-size: 15px; font-weight: 500">
 <a href="#historia" style="display: inline-block; padding: 12px 4px; text-decoration: none">Historia</a>
+<a href="#ingredientes" style="display: inline-block; padding: 12px 4px; text-decoration: none">Ingredientes</a>
 <a href="#producto" style="display: inline-block; padding: 12px 4px; text-decoration: none">Producto</a>
 <a href="#modelo" style="display: inline-block; padding: 12px 4px; text-decoration: none">Modelo</a>
 <a href="#pedidos" style="display: inline-block; padding: 12px 4px; text-decoration: none">Pedidos</a>
@@ -41,17 +85,17 @@ img{max-width:100%}
 
 <div id="inicio" style="background: #3F5E3B; color: #F5F3EA">
 <div style="max-width: 1160px; margin: 0 auto; padding: 72px 24px 80px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; gap: 48px">
-<div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<div class="hero-in" style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
 <div style="font-size: 14px; letter-spacing: 0.22em; text-transform: uppercase; color: #DA8A67; font-weight: 700">Licor espumoso artesanal</div>
 <h1 style="margin: 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(44px, 7vw, 88px); line-height: 0.98; letter-spacing: -0.01em">Kuri Sisary</h1>
 <div style="font-family: 'Fraunces', serif; font-style: italic; font-size: clamp(24px, 3vw, 32px); line-height: 1.25; color: #DA8A67">“Destellos dorados, sutileza artesanal”</div>
 <p style="margin: 0; font-size: 19px; line-height: 1.6; max-width: 520px">Mandarina y azafrán en un elixir espumoso. Kuri Sisary significa “florecimiento dorado” en kichwa, y así lo servimos: brillante, fresco y hecho a mano.</p>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin-top: 8px">
-<a href="#pedidos" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 30px; border-radius: 999px; background: #DA8A67; color: #2B3A28; font-weight: 700; font-size: 16px; text-decoration: none">Haz tu pedido</a>
+<a class="btn-shine" href="#pedidos" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 30px; border-radius: 999px; background: #DA8A67; color: #2B3A28; font-weight: 700; font-size: 16px; text-decoration: none">Haz tu pedido</a>
 <a href="#historia" style="display: inline-flex; align-items: center; min-height: 52px; font-weight: 500; font-size: 16px; text-decoration: underline; text-underline-offset: 5px">Conoce nuestra historia</a>
 </div>
 </div>
-<div style="flex: 0 1 420px; width: 100%; max-width: 420px; margin: 0 auto; border-radius: 28px; overflow: hidden; background: #F7EFE0">
+<div class="logo-float" style="flex: 0 1 420px; width: 100%; max-width: 420px; margin: 0 auto; border-radius: 28px; overflow: hidden; background: #F7EFE0">
 <img src="logo-kuri-sisary.jpeg" alt="Logotipo de Kuri Sisary: mandarina con flor de azahar y gota dorada" style="width: 100%; height: auto; display: block">
 </div>
 </div>
@@ -88,6 +132,14 @@ img{max-width:100%}
 </div>
 </div>
 </div>
+
+<div id="ingredientes" style="background: #3F5E3B; color: #F5F3EA">
+<div style="max-width: 1160px; margin: 0 auto; padding: 88px 24px; box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; gap: 48px">
+<div class="rv rv-l" style="flex: 0 1 300px; margin: 0 auto; display: flex; justify-content: center"><svg viewBox="0 0 200 360" width="220" role="img" aria-label="Copa flauta con licor dorado y burbujas ascendentes" style="max-width:100%;overflow:visible"><defs><clipPath id="bowl"><path d="M58 20 H142 C142 110 128 180 106 222 V292 H94 V222 C72 180 58 110 58 20 Z"/></clipPath><linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2C14E"/><stop offset="1" stop-color="#D97736"/></linearGradient></defs><g clip-path="url(#bowl)"><g class="liquid"><rect x="40" y="52" width="130" height="260" fill="url(#gold)"/><g class="wave"><path d="M-100 52 q25 -9 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 V70 H-100Z" fill="#F7D98A" opacity=".85"/></g></g><circle class="glass-bub" cx="90" cy="200" r="3.5" fill="#fff" opacity=".8" style="--h:-170px;--sx:6px;animation-duration:3.2s;animation-delay:0s"/><circle class="glass-bub" cx="105" cy="190" r="2.5" fill="#fff" opacity=".8" style="--h:-160px;--sx:-8px;animation-duration:2.6s;animation-delay:0.6s"/><circle class="glass-bub" cx="98" cy="170" r="4.5" fill="#fff" opacity=".8" style="--h:-130px;--sx:10px;animation-duration:3.8s;animation-delay:1.2s"/><circle class="glass-bub" cx="85" cy="150" r="2" fill="#fff" opacity=".8" style="--h:-110px;--sx:-4px;animation-duration:2.2s;animation-delay:0.3s"/><circle class="glass-bub" cx="112" cy="140" r="3" fill="#fff" opacity=".8" style="--h:-100px;--sx:5px;animation-duration:3s;animation-delay:1.8s"/><circle class="glass-bub" cx="95" cy="120" r="2.5" fill="#fff" opacity=".8" style="--h:-80px;--sx:-6px;animation-duration:2.4s;animation-delay:0.9s"/><circle class="glass-bub" cx="120" cy="100" r="3.5" fill="#fff" opacity=".8" style="--h:-60px;--sx:3px;animation-duration:3.4s;animation-delay:2.1s"/></g><path d="M58 20 H142 C142 110 128 180 106 222 V292 H94 V222 C72 180 58 110 58 20 Z" fill="rgba(255,255,255,.08)" stroke="#F5F3EA" stroke-width="3" stroke-linejoin="round"/><path d="M68 34 C70 100 78 150 92 190" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".45"/><ellipse cx="100" cy="304" rx="42" ry="8" fill="none" stroke="#F5F3EA" stroke-width="3"/></svg></div>
+<div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+<div class="rv" style="display:flex;flex-direction:column;gap:14px"><div style="font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; color: #DA8A67">Ingredientes</div><h2 style="margin: 0; font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(34px, 4.5vw, 52px); line-height: 1.08">Tres gestos de la naturaleza</h2><p style="margin: 0">Fruta fresca, oro andino y una flor que perfuma. Así se llena la copa.</p></div>
+<div style="display:flex;flex-wrap:wrap;gap:16px"><div class="ing-card rv" style="--rd:0.1s;background:rgba(245,243,234,.08);border:1px solid rgba(245,243,234,.25);border-radius:20px;padding:24px;flex:1 1 150px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px"><svg viewBox="0 0 120 120" width="110" aria-hidden="true"><g class="ing-float"><circle cx="60" cy="66" r="42" fill="#D97736"/><g class="ing-spin"><circle cx="60" cy="66" r="34" fill="#F6A04D"/><g stroke="#FCE3B0" stroke-width="3" stroke-linecap="round"><path d="M60 66V34M60 66l27-16M60 66l27 16M60 66V98M60 66L33 82M60 66L33 50"/></g><circle cx="60" cy="66" r="5" fill="#FCE3B0"/></g><path d="M60 24c2-12 14-16 24-12-2 11-12 17-24 12z" fill="#3F8A3B"/></g></svg><div style="font-family:'Fraunces',serif;font-size:24px;font-weight:600">Mandarina</div><div style="font-size:15px;line-height:1.5;opacity:.9">Frescura cítrica y jugo luminoso.</div></div><div class="ing-card rv" style="--rd:0.25s;background:rgba(245,243,234,.08);border:1px solid rgba(245,243,234,.25);border-radius:20px;padding:24px;flex:1 1 150px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px"><svg viewBox="0 0 120 120" width="110" aria-hidden="true"><g class="ing-float"><circle cx="60" cy="60" r="44" fill="rgba(217,149,31,.25)"/><g stroke="#C8321E" stroke-width="5" stroke-linecap="round" fill="none"><path class="ing-sway" d="M40 20 C36 50 52 70 46 100"/><path class="ing-sway" style="animation-delay:-1s" d="M62 16 C58 46 74 72 68 104"/><path class="ing-sway" style="animation-delay:-2s" d="M84 22 C80 50 94 70 88 98"/></g><g fill="#E8A21E"><circle cx="40" cy="20" r="5"/><circle cx="62" cy="16" r="5"/><circle cx="84" cy="22" r="5"/></g></g></svg><div style="font-family:'Fraunces',serif;font-size:24px;font-weight:600">Azafrán</div><div style="font-size:15px;line-height:1.5;opacity:.9">Hebras que tiñen de oro y dejan un final cálido.</div></div><div class="ing-card rv" style="--rd:0.4s;background:rgba(245,243,234,.08);border:1px solid rgba(245,243,234,.25);border-radius:20px;padding:24px;flex:1 1 150px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px"><svg viewBox="0 0 120 120" width="110" aria-hidden="true"><g class="ing-float"><g class="ing-spin" style="animation-duration:30s"><g fill="#FFFFFF" stroke="#F0E3C8" stroke-width="2"><ellipse cx="60" cy="30" rx="14" ry="22" transform="rotate(0 60 60)"/><ellipse cx="60" cy="30" rx="14" ry="22" transform="rotate(72 60 60)"/><ellipse cx="60" cy="30" rx="14" ry="22" transform="rotate(144 60 60)"/><ellipse cx="60" cy="30" rx="14" ry="22" transform="rotate(216 60 60)"/><ellipse cx="60" cy="30" rx="14" ry="22" transform="rotate(288 60 60)"/></g></g><circle cx="60" cy="60" r="9" fill="#F2C14E"/></g></svg><div style="font-family:'Fraunces',serif;font-size:24px;font-weight:600">Azahar</div><div style="font-size:15px;line-height:1.5;opacity:.9">El aroma floral del instante de la floración.</div></div></div></div>
+</div></div>
 
 <div id="producto" style="background: #FBFAF5">
 <div style="max-width: 1160px; margin: 0 auto; padding: 88px 24px; box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start">
@@ -184,5 +236,25 @@ img{max-width:100%}
 
 </div>
 
+<script>
+(function(){
+var rm=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+var hero=document.getElementById("inicio");
+if(hero&&!rm){for(var i=0;i<18;i++){var b=document.createElement("span");b.className="bub";var z=6+Math.random()*16;
+b.style.cssText="left:"+(Math.random()*100)+"%;width:"+z+"px;height:"+z+"px;--h:-"+(380+Math.random()*320)+"px;--sx:"+(Math.random()*60-30)+"px;animation-duration:"+(7+Math.random()*8)+"s;animation-delay:-"+(Math.random()*12)+"s";
+hero.appendChild(b);}}
+var sel=["#historia > div > *","#historia > div > div:last-child > div","#producto > div > div > *","#producto > div > div:first-child > div > div","#modelo > div > *","#modelo > div > div:nth-child(2) > div","#pedidos > div > div > *","#pedidos > div > div:first-child > div > div"];
+var els=[];
+sel.forEach(function(q){document.querySelectorAll(q).forEach(function(e){if(els.indexOf(e)<0&&!e.classList.contains("rv")&&!e.querySelector(".rv"))els.push(e)})});
+els.forEach(function(e){e.classList.add("rv");var idx=Array.prototype.indexOf.call(e.parentElement.children,e);e.style.setProperty("--rd",Math.min(idx*0.08,0.5)+"s");
+if(/border-radius/.test(e.getAttribute("style")||""))e.classList.add("hov");});
+document.querySelectorAll("#producto > div > div:last-child, #pedidos > div > div:last-child").forEach(function(e){e.classList.add("rv-r")});
+document.querySelectorAll("#producto [style*='border-radius: 50%']").forEach(function(e){e.classList.add("dot-pop")});
+var all=document.querySelectorAll(".rv");
+if(!("IntersectionObserver" in window)){all.forEach(function(e){e.classList.add("in")});return}
+var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target)}})},{threshold:.15,rootMargin:"0px 0px -40px 0px"});
+all.forEach(function(e){io.observe(e)});
+})();
+</script>
 </body>
 </html>
